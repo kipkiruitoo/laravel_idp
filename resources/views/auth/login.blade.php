@@ -21,6 +21,9 @@
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
+            @if(isset($_GET['SAMLRequest']))
+            <input type="hidden" id="SAMLRequest" name="SAMLRequest" value="{{ $_GET['SAMLRequest'] }}">
+            @endif
 
             <!-- Password -->
             <div class="mt-4">

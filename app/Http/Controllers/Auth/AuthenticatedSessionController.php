@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use SamlAuth;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
@@ -28,11 +29,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        if (isset($request['SAMLRequest'])) {
+            new SamlAuth($request);
+        } else {
+            $request->authenticate();
 
-        return redirect(RouteServiceProvider::HOME);
+            $request->session()->regenerate();
+
+            return redirect(RouteServiceProvider::HOME);
+        }
     }
 
     /**
@@ -50,5 +56,23 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+
+    // handle the saml request
+    protected function handleSAMLRequest($request)
+    {
+        $SAML = $request->SAMLRequest;
+        $decoded = base64_decode($SAML);
+        $xml = gzinflate($decoded);
+
+        $deserializationContext = new \LightSaml\Model\Context\DeserializationContext();
+        $deserializationContext->getDocument()->loadXML($xml);
+
+        $authnRequest = new \LightSaml\Model\Protocol\AuthnRequest();
+
+        $authnRequest->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
+
+        $this->buildSAMLResponse($authnRequest, $request);
     }
 }
