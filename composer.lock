@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc59441b8f20525fd2a75c9f8542463b",
+    "content-hash": "6d4e1d7ea6debd6a1c279e6af9bc3618",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -117,6 +117,60 @@
                 }
             ],
             "time": "2020-08-18T23:57:15+00:00"
+        },
+        {
+            "name": "codegreencreative/laravel-samlidp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codegreencreative/laravel-samlidp.git",
+                "reference": "2600dbd5c08dd792a3fafedcab734b3b5d12f964"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codegreencreative/laravel-samlidp/zipball/2600dbd5c08dd792a3fafedcab734b3b5d12f964",
+                "reference": "2600dbd5c08dd792a3fafedcab734b3b5d12f964",
+                "shasum": ""
+            },
+            "require": {
+                "forlabs/lightsaml": "^2.0",
+                "illuminate/routing": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CodeGreenCreative\\SamlIdp\\LaravelSamlIdpServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CodeGreenCreative\\SamlIdp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Make your Laravel application an Idenification Provider using SAML 2.0.",
+            "keywords": [
+                "SAML 2.0",
+                "SSO",
+                "acl",
+                "auth",
+                "idp",
+                "laravel",
+                "saml"
+            ],
+            "support": {
+                "issues": "https://github.com/codegreencreative/laravel-samlidp/issues",
+                "source": "https://github.com/codegreencreative/laravel-samlidp/tree/master"
+            },
+            "time": "2020-10-30T03:04:06+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -7507,7 +7561,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "codegreencreative/laravel-samlidp": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

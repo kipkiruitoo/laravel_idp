@@ -14,16 +14,15 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            {{-- @samlidp --}}
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="email" :value="__('ID Number')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-input id="email" class="block mt-1 w-full" type="number" name="national_id" :value="old('national_id')" required autofocus />
             </div>
-            @if(isset($_GET['SAMLRequest']))
-            <input type="hidden" id="SAMLRequest" name="SAMLRequest" value="{{ $_GET['SAMLRequest'] }}">
-            @endif
+            @samlidp
 
             <!-- Password -->
             <div class="mt-4">

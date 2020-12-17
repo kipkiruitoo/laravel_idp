@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "codegreencreative/laravel-samlidp": "dev-master",
         "fideloper/proxy": "^4.4",
         "forlabs/lightsaml": "^2.0",
         "fruitcake/laravel-cors": "^2.0",

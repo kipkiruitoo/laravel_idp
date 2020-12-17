@@ -30,15 +30,15 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
 
-        if (isset($request['SAMLRequest'])) {
-            new SamlAuth($request);
-        } else {
+        // if (isset($request['SAMLRequest'])) {
+        //     new SamlAuth($request);
+        // } else {
             $request->authenticate();
 
             $request->session()->regenerate();
 
             return redirect(RouteServiceProvider::HOME);
-        }
+        // }
     }
 
     /**
