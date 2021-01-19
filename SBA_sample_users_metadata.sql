@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `s_users` (
   `RowID` int(11) NOT NULL AUTO_INCREMENT,
   `national_id` varchar(10) NOT NULL DEFAULT '0',
   `fullname` varchar(200) NOT NULL,
@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `createdby` int(11) NOT NULL DEFAULT 0,
   `changedby` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`RowID`)
-) ENGINE=InnoDB AUTO_INCREMENT=86993 DEFAULT CHARSET=latin1;
+)
 
-INSERT INTO `s_user` (`RowID`, `national_id`, `name`, `firstname`, `middlename`, `lastname`, `dob`, `placeofbirth`, `gender`, `uname`, `pword`, `requestedpwd`, `email`, `cellphone`, `activationcode`, `roleid`, `mda`, `station`, `dateset`, `customertype`, `country`, `locked`, `blacklist`, `lastchanged`, `createdby`, `changedby`) VALUES
+INSERT INTO `s_users` (`RowID`, `national_id`, `name`, `firstname`, `middlename`, `lastname`, `dob`, `placeofbirth`, `gender`, `uname`, `pword`, `requestedpwd`, `email`, `cellphone`, `activationcode`, `roleid`, `mda`, `station`, `dateset`, `customertype`, `country`, `locked`, `blacklist`, `lastchanged`, `createdby`, `changedby`) VALUES
 	(1, '0', 'Appointment Admin', 'Appointment', NULL, 'Admin', NULL, 'Huduma Kenya', 'M', 'admin', 'f77d1e0ab8f586bc01de8448d1884c987b140ad72ab975f926a937f471fc3f07', NULL, 'fkimingi@hudumakenya.go.ke', '+254725936174', 000000, 1, 52, 54, '2018-10-05 14:12:51', 'HKS_STAFF', 'KENYA', 0, 0, '2020-07-23 20:10:52', 0, 0),
 	(2, '0', 'Front Office', 'Front', NULL, 'Office', NULL, 'Huduma Kenya', 'M', 'frontoffice', 'f77d1e0ab8f586bc01de8448d1884c987b140ad72ab975f926a937f471fc3f07', NULL, 'fkimingi@hudumakenya.go.ke', '+254725936174', 000000, 2, 52, 42, '2018-10-12 11:52:54', 'HKS_STAFF', 'KENYA', 0, 0, '2018-10-12 11:52:54', 0, 0),
 	(3, '0', 'MDAC Agent', 'MDAC', NULL, 'Agent', NULL, 'Huduma Kenya', 'M', 'agent', 'f77d1e0ab8f586bc01de8448d1884c987b140ad72ab975f926a937f471fc3f07', NULL, 'fkimingi@hudumakenya.go.ke', '+254725936174', 000000, 3, 11, 42, '2018-10-12 12:24:57', 'HKS_STAFF', 'KENYA', 0, 0, '2018-10-12 12:24:57', 0, 0),

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use App\Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -44,24 +43,6 @@ class LoginRequest extends FormRequest
      */
     public function authenticate()
     {
-        // dd($this);
-        $this->ensureIsNotRateLimited();
-
-        if (User::where('national_id', $this->national_id)->exists()) {
-            // user exists proceed and try to authenticate them
-            $user = User::where('national_id', $this->national_id)->first();
-            if ($user->password == hash('sha256', $this->password)) {
-                Auth::login($user);
-            } else {
-                RateLimiter::hit($this->throttleKey());
-            }
-        } else {
-            // user does not exists, throw exception
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
-            ]);
-        }
-        RateLimiter::clear($this->throttleKey());
     }
 
     /**

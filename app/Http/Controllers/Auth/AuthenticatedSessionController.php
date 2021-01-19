@@ -7,7 +7,10 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use SamlAuth;
+use App\Models\User;
+use Illuminate\Auth\Events\Login as LoginEvent;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,15 +33,26 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
 
-        // if (isset($request['SAMLRequest'])) {
-        //     new SamlAuth($request);
-        // } else {
-            $request->authenticate();
+        $SAMLRequest = $request->query("SAMLRequest");
 
-            $request->session()->regenerate();
+        $user = User::where('national_id', $request->national_id)->first();
+        if (User::where('national_id', $request->national_id)->exists()) {
+            $user = User::where('national_id', $request->national_id)->first();
 
-            return redirect(RouteServiceProvider::HOME);
-        // }
+            if ($user->password == hash("sha256", $request->password)) {
+
+
+
+                Auth::login($user);
+                $request->session()->regenerate();
+
+                event(new LoginEvent("web", $user, true));
+            } else {
+                return redirect()->back()->withErrors(["national_id" => "Wrong Password or ID Number"])->withQuery(['SAMLRequest' =>  $SAMLRequest]);
+            }
+        } else {
+            return redirect()->back()->withErrors(["national_id" => "Wrong Password or ID Number"])->withQuery(['SAMLRequest' =>  $SAMLRequest]);
+        }
     }
 
     /**
